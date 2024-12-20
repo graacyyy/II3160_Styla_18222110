@@ -1,9 +1,9 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "../components/nav-home"
-import About from "./about/page"
-import { WhyChooseUs } from "./whyChooseUs/page"
-import Subscription from "./subs-landing/page"
+import About from "@/app/About"
+import { WhyChooseUs } from "@/app/whyChooseUs"
+import Subscription from "@/app/Subscription"
 import { redirect } from "next/navigation"
 
 export default async function LandingPage() {
