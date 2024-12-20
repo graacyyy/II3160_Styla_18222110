@@ -225,6 +225,10 @@ app.get("/box/newest", async (c) => {
     .where(eq(box.customerId, user.id))
     .limit(1);
 
+  if (!boxId) {
+    return c.json({ data: [] });
+  }
+
   const data = await db
     .select()
     .from(boxProduct)
