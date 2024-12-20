@@ -232,37 +232,37 @@ export default function NewBox() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="height">Height</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.height} cm
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="weight">Weight</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.weight} kg
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="bust">Bust</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.bust} cm
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="waist">Waist</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.waist} cm
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="hip">Hip</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.hip} cm
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="shoeSize">Shoe Size</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.shoeSize}
                         </span>
                       </div>
@@ -270,7 +270,7 @@ export default function NewBox() {
                         <Label htmlFor="colorPreferences">
                           Color Preferences
                         </Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.colorPreference}
                         </span>
                       </div>
@@ -278,13 +278,13 @@ export default function NewBox() {
                         <Label htmlFor="stylePreferences">
                           Style Preferences
                         </Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.stylePreference}
                         </span>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="job">Job</Label>
-                        <span className="text-gray-700 ml-4">
+                        <span className="text-gray-700">
                           {selectedCustomer.user_detail.job}
                         </span>
                       </div>
