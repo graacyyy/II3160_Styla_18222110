@@ -219,13 +219,17 @@ app.get("/box/newest", async (c) => {
     return c.json({ message: "Unauthorized" }, 401);
   }
 
-  const [data] = await db
+  const [boxId] = await db
     .select()
     .from(box)
-    .innerJoin(boxProduct, eq(box.id, boxProduct.boxId))
-    .innerJoin(product, eq(boxProduct.productId, product.id))
     .where(eq(box.customerId, user.id))
     .limit(1);
+
+  const data = await db
+    .select()
+    .from(boxProduct)
+    .innerJoin(product, eq(boxProduct.productId, product.id))
+    .where(eq(boxProduct.boxId, boxId.id));
 
   return c.json({
     data,
