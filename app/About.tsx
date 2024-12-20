@@ -16,7 +16,7 @@ export default function About() {
         <div className="relative w-full lg:w-1/2">
           <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-3xl shadow-lg lg:aspect-auto">
             <Image
-              src="/1.png"
+              src="/about.png"
               alt="About Styla"
               width={500}
               height={500}
