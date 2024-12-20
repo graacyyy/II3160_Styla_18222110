@@ -100,6 +100,16 @@ export default function InsideYourBox() {
     );
   }
 
+  // Group boxes by boxId
+  const groupedBoxes = boxes.reduce((acc, item) => {
+    const boxId = item.box.id;
+    if (!acc[boxId]) {
+      acc[boxId] = [];
+    }
+    acc[boxId].push(item);
+    return acc;
+  }, {} as Record<string, BoxItem[]>);
+
   return (
     <div className="min-h-screen w-full">
       <Navbar />
@@ -108,17 +118,21 @@ export default function InsideYourBox() {
           <h1 className="text-black text-2xl font-semibold">Inside Your Box</h1>
         </div>
         <div className="w-full px-10">
-          {/* Display each box */}
-          {boxes.map((item, index) => (
-            <div key={index} className="flex flex-row gap-2 pt-5">
-              <h1 className="font-semibold">Box ID: </h1>
-              <h1>{item.box.id}</h1>
-              <div className="flex flex-wrap justify-between gap-5">
-                {item.product ? (
-                  <div className="flex flex-col pt-5">
+          {Object.entries(groupedBoxes).map(([boxId, items]) => (
+            <div key={boxId} className="mb-10">
+              <div className="flex flex-row gap-2 pt-5">
+                <h1 className="font-semibold">Box ID: </h1>
+                <h1>{boxId}</h1>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 pt-5">
+                {items.map((item) => (
+                  <div
+                    key={item.box_product.productId}
+                    className="flex flex-col"
+                  >
                     <div className="w-[240px] h-[268px]">
                       <Image
-                        src={item.product.image || "/placeholder.png"} // Display default image if `image` is null
+                        src={`/${item.product.image}` || "/placeholder.png"}
                         alt={item.product.name}
                         width={240}
                         height={268}
@@ -131,9 +145,7 @@ export default function InsideYourBox() {
                       <h1>IDR {item.product.price.toLocaleString("id-ID")}</h1>
                     </div>
                   </div>
-                ) : (
-                  <div>No product details available.</div>
-                )}
+                ))}
               </div>
             </div>
           ))}
