@@ -131,6 +131,7 @@ app.post("/box", async (c) => {
   const [id] = await db
     .insert(box)
     .values({
+      id: `FB${Date.now()}`,
       customerId: data.customerId,
     })
     .returning();
