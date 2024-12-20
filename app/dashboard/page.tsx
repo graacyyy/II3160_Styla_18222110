@@ -177,7 +177,6 @@ export default function Dashboard() {
               <h1 className="text-2xl font-semibold">Curate Box</h1>
               <Button className="bg-violet-500 hover:bg-violet-600">
                 <Link href="/new-box">
-                  <Plus className="mr-2 h-4 w-4" />
                   Curate New Box
                 </Link>
               </Button>
