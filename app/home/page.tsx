@@ -39,11 +39,9 @@ export default function Home() {
       }
       return response.json();
     },
-    staleTime: 30000,
+    retry: 1,
     // cacheTime: 1000 * 60 * 5,
     enabled: !!session && session.user?.role === "user" && isMounted,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 
   // Handle redirects in useEffect to avoid rules of hooks violations
@@ -81,7 +79,9 @@ export default function Home() {
     return <div>Error loading latest box.</div>;
   }
 
-  const latestBox = newestBoxQuery.data;
+  const latestBox = newestBoxQuery.data.data;
+
+  console.log("latestBox", latestBox);
 
   return (
     <div className="min-h-screen">
@@ -116,33 +116,47 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mt-8">
-            {latestBox && latestBox.product ? (
-              <div className="flex flex-col items-center justify-center border rounded-lg p-5 bg-white">
-                {latestBox.product.image ? (
-                  <Image
-                    src={latestBox.product.image}
-                    alt={latestBox.product.name}
-                    width={200}
-                    height={200}
-                    className="h-56 w-full object-cover mb-4"
-                  />
-                ) : (
-                  <div className="h-56 w-full bg-gray-300 mb-4"></div>
-                )}
-                <h3 className="text-lg font-medium text-gray-900">
-                  {latestBox.product.name}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {latestBox.product.brandName}
-                </p>
-                <p className="text-lg text-gray-900 mt-2">
-                  IDR {latestBox.product.price.toLocaleString("id-ID")}
-                </p>
-              </div>
+            {latestBox && latestBox.length > 0 ? (
+              latestBox.map(
+                (item: {
+                  box_product: { productId: string };
+                  product: {
+                    name: string;
+                    brandName: string;
+                    price: number;
+                    image: string;
+                  };
+                }) => (
+                  <div
+                    key={item.box_product.productId}
+                    className="flex flex-col items-center justify-center border rounded-lg p-5 bg-white"
+                  >
+                    {item.product.image ? (
+                      <Image
+                        src={`/${item.product.image}`}
+                        alt={item.product.name}
+                        width={200}
+                        height={200}
+                        className="h-56 w-full object-cover mb-4"
+                      />
+                    ) : (
+                      <div className="h-56 w-full bg-gray-300 mb-4"></div>
+                    )}
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {item.product.name}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {item.product.brandName}
+                    </p>
+                    <p className="text-lg text-gray-900 mt-2">
+                      IDR {item.product.price.toLocaleString("id-ID")}
+                    </p>
+                  </div>
+                )
+              )
             ) : (
-              <div>No latest box available.</div>
+              <div>No products available.</div>
             )}
           </div>
         </div>
